@@ -681,24 +681,22 @@ if (console) {
                             attroff(A_BOLD);
                         }
                     } else {
-                        if (console || xwindow) {
-                            attron(A_ALTCHARSET);
-                        }
                         if (bold == 2 ||
                             (bold == 1 && matrix[i][j].val % 2 == 0)) {
                             attron(A_BOLD);
                         }
-                        if (matrix[i][j].val == -1) {
+                        if (matrix[i][j].val == -1 || matrix[i][j].val == ' ') {
                             addch(' ');
                         } else {
+                            if (console || xwindow)
+                                attron(A_ALTCHARSET);
                             addch(matrix[i][j].val);
+                            if (console || xwindow)
+                                attroff(A_ALTCHARSET);
                         }
                         if (bold == 2 ||
                             (bold == 1 && matrix[i][j].val % 2 == 0)) {
                             attroff(A_BOLD);
-                        }
-                        if (console || xwindow) {
-                            attroff(A_ALTCHARSET);
                         }
                     }
                     attroff(COLOR_PAIR(mcolor));
